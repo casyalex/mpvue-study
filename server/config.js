@@ -1,4 +1,14 @@
 const CONF = {
+    serverHost: 'localhost',
+    tunnelServerUrl: '',
+    tunnelSignatureKey: '27fb7d1c161b7ca52d73cce0f1d833f9f5b5ec89',
+    // 腾讯云相关配置可以查看云 API 秘钥控制台：https://console.cloud.tencent.com/capi
+    qcloudAppId: '1257279281',
+    qcloudSecretId: 'AKID781kHFkrPl172vG5MbrzWvAE7pLKg0b3',
+    qcloudSecretKey: 'RitumW5XoxviJiw0veKseOwLZeXGuMdl',
+    wxMessageToken: 'weixinmsgtoken',
+    networkTimeout: 30000,
+
     port: '5757',
     rootPathname: '',
 
@@ -21,7 +31,7 @@ const CONF = {
         port: 3306,
         user: 'root',
         db: 'cAuth',
-        pass: 'wx7b52b985a01b1600',
+        pass: 'yaoxing88',
         char: 'utf8mb4'
     },
 
@@ -38,8 +48,8 @@ const CONF = {
     },
 
     // 微信登录态有效期
-    wxLoginExpires: 7200,
-    wxMessageToken: 'abcdefgh'
+    wxLoginExpires: 7200
+    // wxMessageToken: 'abcdefgh'
 }
 
 module.exports = CONF

@@ -10,15 +10,29 @@
   </div>
 </template>
 <script>
-// import qcloud from 'wafer2-client-sdk'
-// import config from '@/config'
+import qcloud from 'wafer2-client-sdk'
+import config from '@/config'
 export default {
   data () {
     return {
       userinfo: {
         avatarUrl: 'http://image.shengxinjing.cn/rate/unlogin.png',
-        nickName: ''
+        nickName: '未登陆'
       }
+    }
+  },
+  methods: {
+    login () {
+      qcloud.setLoginUrl(config.loginUrl)
+      qcloud.login({
+        success: (userinfo) => {
+          console.log('登陆成功', userinfo)
+          this.userinfo = userinfo
+        },
+        fail: (err) => {
+          console.log('登陆失败', err)
+        }
+      })
     }
   }
   // methods: {

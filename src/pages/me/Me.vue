@@ -11,7 +11,7 @@
 </template>
 <script>
 import qcloud from 'wafer2-client-sdk'
-import config from '@/config'
+import {showSuccess} from '../../util'
 export default {
   data () {
     return {
@@ -23,17 +23,26 @@ export default {
   },
   methods: {
     login () {
-      qcloud.setLoginUrl(config.loginUrl)
-      qcloud.login({
-        success: (userinfo) => {
-          console.log('登陆成功', userinfo)
-          this.userinfo = userinfo
-        },
-        fail: (err) => {
-          console.log('登陆失败', err)
-        }
-      })
+      let user = wx.getStorageSync('userinfo')
+      if (!user) {
+        qcloud.login({
+          success: (userinfo) => {
+            console.log('登陆成功', userinfo)
+            wx.setStorageSync('userinfo', userinfo)
+            this.userinfo = userinfo
+            showSuccess('登陆成功')
+          },
+          fail: (err) => {
+            console.log('登陆失败', err)
+          }
+        })
+      } else {
+
+      }
     }
+  },
+  created () {
+    this.userinfo = wx.getStorageSync('userinfo')
   }
   // methods: {
   //   getWxLogin: function ({encryptedData, iv, userinfo}) {
@@ -80,11 +89,13 @@ export default {
   padding: 0 30rpx
 
 .userinfo
-  margin-top: 100rpx
+  margin: 100rpx 0 20rpx
   text-align: center
   img
     width: 150rpx
     height: 150rpx
     margin: 20rpx
     border-radius: 50%
+  p
+    font-size 16px
 </style>

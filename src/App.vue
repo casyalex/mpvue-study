@@ -19,5 +19,16 @@ export default {
 </script>
 
 <style lang="stylus">
-
+.btn
+  color #fff
+  background #EA5A49
+  margin-bottom 10px
+  padding 0 15px
+  border-radius 2px
+  font-size 16px
+  line-height 40px
+  height 40px
+  width 100%
+  &:active
+    background #FA5A49
 </style>

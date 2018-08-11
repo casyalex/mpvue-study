@@ -4,6 +4,7 @@
       <img :src="userinfo.avatarUrl" alt="">
       <p>{{userinfo.nickName}}</p>
     </div>
+    <YearProgress />
     <button v-if='userinfo.openId' @click='scanBook' class='btn'>添加图书</button>
     <button v-else open-type="getUserInfo" lang="zh_CN" class='btn' @getuserinfo="login">点击登录</button>
     <!-- <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="doLogin">获取用户信息</button> -->
@@ -11,8 +12,12 @@
 </template>
 <script>
 import qcloud from 'wafer2-client-sdk'
-import {showSuccess} from '../../util'
+import {showSuccess} from '@/util'
+import YearProgress from '@/components/YearProgress.vue'
 export default {
+  components: {
+    YearProgress
+  },
   data () {
     return {
       userinfo: {
@@ -22,6 +27,13 @@ export default {
     }
   },
   methods: {
+    scanBook () {
+      wx.scanCode({
+        success: (res) => {
+          console.log(res)
+        }
+      })
+    },
     login () {
       let user = wx.getStorageSync('userinfo')
       if (!user) {
@@ -36,51 +48,16 @@ export default {
             console.log('登陆失败', err)
           }
         })
-      } else {
-
       }
     }
   },
   created () {
-    this.userinfo = wx.getStorageSync('userinfo')
+    let user = wx.getStorageSync('userinfo')
+
+    if (user) {
+      this.userinfo = user
+    }
   }
-  // methods: {
-  //   getWxLogin: function ({encryptedData, iv, userinfo}) {
-  //     const self = this
-  //     wx.login({
-  //       success: function (loginResult) {
-  //         console.log('loginResult', loginResult)
-  //         var loginParams = {
-  //           code: loginResult.code,
-  //           encryptedData: encryptedData,
-  //           iv: iv
-  //         }
-  //         qcloud.setLoginUrl(config.loginUrl)
-  //         qcloud.requestLogin({
-  //           loginParams,
-  //           success () {
-  //             // 获取用户信息
-  //             qcloud.request({
-  //               url: config.userUrl,
-  //               login: true,
-  //               success (userRes) {
-  //                 wx.setStorageSync('userinfo', userRes.data.data)
-  //                 self.userinfo = userRes.data.data
-  //               }
-  //             })
-  //           },
-  //           fail (error) {
-  //             console.log(error)
-  //             // showModal('登录失败', error)
-  //           }
-  //         })
-  //       },
-  //       fail: function (loginError) {
-  //         // showModal('登录失败', loginError)
-  //       }
-  //     })
-  //   }
-  // }
 }
 </script>
 

@@ -12,7 +12,7 @@
 </template>
 <script>
 import qcloud from 'wafer2-client-sdk'
-import {showSuccess} from '@/util'
+import {showSuccess, post} from '@/util'
 import YearProgress from '@/components/YearProgress.vue'
 export default {
   components: {
@@ -27,9 +27,22 @@ export default {
     }
   },
   methods: {
+    async addBook (isbnn) {
+      console.log(isbnn)
+      const res = await post('/weapp/addbook', {
+        isbn: isbnn,
+        openid: this.userinfo.openId
+      })
+      if (res.code === 0 && res.data.title) {
+        showSuccess('添加成功', `${res.data.title}添加成功`)
+      }
+    },
     scanBook () {
       wx.scanCode({
         success: (res) => {
+          if (res.result) {
+            this.addBook(res.result)
+          }
           console.log(res)
         }
       })

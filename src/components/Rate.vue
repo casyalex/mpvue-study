@@ -25,8 +25,6 @@ export default {
 .rate
   position relative
   display inline-block
-  span
-    width 5em
   .hollow
     position absolute
     display inline-block

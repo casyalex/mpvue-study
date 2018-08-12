@@ -5,10 +5,11 @@
     </div>
     <div class="detail">
       <div class="row">
-        <div class="right">
+        <div class="right text-primary">
           {{book.rate}}
+          <rate :value="book.rate"></rate>
         </div>
-        <div class="left">
+        <div class="left text-primary">
           {{book.title}}
         </div>
       </div>
@@ -33,7 +34,11 @@
 </template>
 
 <script>
+import Rate from '@/components/Rate'
 export default {
+  components: {
+    Rate
+  },
   props: ['book']
 }
 </script>

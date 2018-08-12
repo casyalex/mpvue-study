@@ -18,8 +18,9 @@ function request (url, method, data) {
       url: config.host + url,
       success: (res) => {
         if (res.data.code === 0) {
-          resolve(res)
+          resolve(res.data.data)
         } else {
+          showModal('失败', res.data.data.msg)
           reject(res.data)
         }
       }
@@ -32,5 +33,13 @@ export function showSuccess (text) {
     title: text,
     icon: 'success',
     duration: 2000
+  })
+}
+
+export function showModal (title, content) {
+  wx.showModal({
+    title,
+    content,
+    showCancel: false
   })
 }

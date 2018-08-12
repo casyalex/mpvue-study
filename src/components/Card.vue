@@ -23,7 +23,7 @@
       </div>
       <div class="row">
         <div class="right">
-          添加人
+          {{book.user_info.nickName}}
         </div>
         <div class="left">
           {{book.publisher}}

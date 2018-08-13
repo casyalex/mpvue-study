@@ -19,6 +19,10 @@ export default {
 </script>
 
 <style lang="stylus">
+.text-footer
+  text-align center
+  font-size 12px
+  margin-bottom 5px
 .text-primary
   color #EA5149
 .btn

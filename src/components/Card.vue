@@ -45,6 +45,7 @@ export default {
 
 <style lang="stylus" scoped>
 .book-card
+  // height 500px
   padding 5px
   overflow hidden
   margin-top 5px

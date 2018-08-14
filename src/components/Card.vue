@@ -1,36 +1,38 @@
 <template>
-  <div class="book-card">
-    <div class="thumb">
-      <img :src="book.image" class="image" mode="aspectFit">
+  <a :href="detailUrl">
+    <div class="book-card">
+      <div class="thumb">
+        <img :src="book.image" class="image" mode="aspectFit">
+      </div>
+      <div class="detail">
+        <div class="row">
+          <div class="right text-primary">
+            {{book.rate}}
+            <rate :value="book.rate"></rate>
+          </div>
+          <div class="left text-primary">
+            {{book.title}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="right">
+            浏览量：
+          </div>
+          <div class="left">
+            {{book.author}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="right">
+            {{book.user_info.nickName}}
+          </div>
+          <div class="left">
+            {{book.publisher}}
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="detail">
-      <div class="row">
-        <div class="right text-primary">
-          {{book.rate}}
-          <rate :value="book.rate"></rate>
-        </div>
-        <div class="left text-primary">
-          {{book.title}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="right">
-          浏览量：
-        </div>
-        <div class="left">
-          {{book.author}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="right">
-          {{book.user_info.nickName}}
-        </div>
-        <div class="left">
-          {{book.publisher}}
-        </div>
-      </div>
-    </div>
-  </div>
+  </a>
 </template>
 
 <script>
@@ -39,7 +41,12 @@ export default {
   components: {
     Rate
   },
-  props: ['book']
+  props: ['book'],
+  computed: {
+    detailUrl () {
+      return '/pages/detail/main?id=' + this.book.id
+    }
+  }
 }
 </script>
 

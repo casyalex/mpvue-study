@@ -41,10 +41,15 @@ export default {
         this.books = this.books.concat(books.list)
       }
       wx.hideNavigationBarLoading()
+    },
+    async getTop () {
+      const tops = await get('/weapp/top')
+      this.tops = tops.list
     }
   },
   onPullDownRefresh () {
     this.getList(true)
+    this.getTop()
   },
   onReachBottom () {
     if (!this.more) {
@@ -55,6 +60,7 @@ export default {
   },
   mounted () {
     this.getList(true)
+    this.getTop()
   }
 }
 </script>

@@ -27,3 +27,5 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 1 客户端 client 即Vue部分
 
 2 服务端 server 即koa部分 用腾讯云方案可以包办 用NodeJS Demo修改一下就可以上线。与客户端通信的API 由wafer2负责
+
+找时间了解 lodash的chunk函数 能让数组添加多一维

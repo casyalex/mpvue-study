@@ -16,17 +16,50 @@
         </div>
       </div>
     </div>
+    <div class="detail">
+        <img class="avatar" mode="aspectFit" :src="userinfo.image" alt="">
+        {{userinfo.nickName}}
+      <div class="right text-primary">
+        {{info.rate}}分
+        <rate :value="info.rate"></rate>
+      </div>
+    </div>
+    <div class="detail">
+      {{info.publisher}}
+      <div class="right">
+        {{info.price}}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Rate from '@/components/Rate'
 export default {
-  props: ['info']
+  components: {
+    Rate
+  },
+  props: ['info'],
+  computed: {
+    userinfo () {
+      return this.info.user_info || {}
+    }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
 .bookinfo
+  font-size 14px
+  .right
+    float right
+  .detail
+    padding 5px 10px
+    .avatar
+      width 20px
+      height 20px
+      border-radius 50%
+      vertical-align middle
   .thumb
     position relative
     width 750rpx

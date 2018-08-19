@@ -16,12 +16,15 @@
         <switch color="#EA5A49" :checked="phone" @change="getPhone"></switch>
         <span class="text-primary">{{phone}}</span>
       </div>
+      <button class="btn" @click="addComment">
+        评论
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import {get} from '@/util'
+import {get, post, showModal} from '@/util'
 import BookInfo from '@/components/BookInfo'
 export default {
   components: {
@@ -29,7 +32,8 @@ export default {
   },
   data () {
     return {
-      bookid: '1',
+      userinfo: '',
+      bookid: '',
       info: {},
       comment: '',
       location: '',
@@ -85,11 +89,36 @@ export default {
       } else {
         this.phone = ''
       }
+    },
+    async addComment () {
+      if (!this.comment) {
+        return false
+      }
+      // 评论内容 型号 地理位置 图书id 用户的openid
+      const data = {
+        userinfo: this.userinfo.openId,
+        bookid: this.bookid,
+        comment: this.comment,
+        phone: this.phone,
+        location: this.location
+      }
+      console.log(data)
+      try {
+        await post('/weapp/addcomment', data)
+        this.comment = ''
+      } catch (error) {
+        showModal('扑街', error.msg)
+        console.log(error)
+      }
     }
   },
   mounted () {
     this.bookid = this.$root.$mp.query.id // mpvue特有的写法
     this.getDetail()
+    const userinfo = wx.getStorageSync('userinfo')
+    if (userinfo) {
+      this.userinfo = userinfo
+    }
   }
 }
 </script>

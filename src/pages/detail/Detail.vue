@@ -45,7 +45,38 @@ export default {
       this.info = info
       console.log(info)
     },
-    getGeo () {},
+    getGeo (e) {
+      // 7enEFruoaol5sB8O1oiDMtW55sM93VRi
+      // http://api.map.baidu.com/geocoder/v2/
+      const ak = '7enEFruoaol5sB8O1oiDMtW55sM93VRi'
+      let url = 'http://api.map.baidu.com/geocoder/v2/'
+      if (e.target.value) {
+        wx.getLocation({
+          success: res => {
+            wx.request({
+              url,
+              data: {
+                location: `${res.latitude}, ${res.longitude}`,
+                output: 'json',
+                ak
+              },
+              success: res => {
+                console.log(res)
+                if (res.data.status === 0) {
+                  this.location = res.data.result.addressComponent.city
+                } else {
+                  console.log('地理位置获取出错了')
+                  this.location = '火星网友'
+                }
+              }
+            })
+            // console.log(res)
+          }
+        })
+      } else {
+        this.location = ''
+      }
+    },
     getPhone (e) {
       if (e.target.value) {
         const phoneInfo = wx.getSystemInfoSync()

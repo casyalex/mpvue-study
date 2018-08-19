@@ -13,3 +13,12 @@ CREATE TABLE `books` (
   `author` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+create table comments(
+  id int not null AUTO_INCREMENT PRIMARY KEY,
+  openid varchar(100) not null,
+  bookid varchar(10) not null,
+  comment varchar(200) not null,
+  phone varchar(50),
+  location varchar(50)
+);

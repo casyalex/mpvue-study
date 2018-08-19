@@ -96,7 +96,7 @@ export default {
       }
       // 评论内容 型号 地理位置 图书id 用户的openid
       const data = {
-        userinfo: this.userinfo.openId,
+        openid: this.userinfo.openId,
         bookid: this.bookid,
         comment: this.comment,
         phone: this.phone,

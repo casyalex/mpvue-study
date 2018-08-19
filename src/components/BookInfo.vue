@@ -30,6 +30,16 @@
         {{info.price}}
       </div>
     </div>
+    <div class="tags">
+      <div class="badge" v-for="(tag, index) in info.tags" :key="index">
+        {{tag}}
+      </div>
+    </div>
+    <div class="summary">
+      <p v-for="(sum, index) in info.summary" :key="index">
+        {{sum}}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -85,6 +95,22 @@ export default {
         font-size 20px
       .author
         font-size 14px
+  .tags
+    padding 0 10px
+    .badge
+      display inline-block
+      font-size 12px
+      margin 5px
+      padding 5px
+      border-radius 10px
+      border 1px #ea5a49 solid
+      color #ea5a49
+  .summary
+    margin-top 10px
+    padding 0 15px
+    p
+      text-indent 2em
+      font-size 14px
 </style>
 
 

@@ -25,6 +25,13 @@ export default {
   margin-bottom 5px
 .text-primary
   color #EA5149
+.page-title
+  padding-left 20px
+  background #eee
+  line-height 40px
+  font-size 14px
+.right
+  float right
 .btn
   color #fff
   background #EA5A49

@@ -32,6 +32,7 @@ export default {
   },
   data () {
     return {
+      comments: '',
       userinfo: '',
       bookid: '',
       info: {},
@@ -47,7 +48,11 @@ export default {
         title: info.title
       })
       this.info = info
-      console.log(info)
+      // console.log(info)
+    },
+    async getComments () {
+      const comments = await get('/weapp/commentlist', {bookid: this.bookid})
+      this.comments = comments
     },
     getGeo (e) {
       // 7enEFruoaol5sB8O1oiDMtW55sM93VRi
@@ -115,6 +120,7 @@ export default {
   mounted () {
     this.bookid = this.$root.$mp.query.id // mpvue特有的写法
     this.getDetail()
+    this.getComments()
     const userinfo = wx.getStorageSync('userinfo')
     if (userinfo) {
       this.userinfo = userinfo

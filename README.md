@@ -30,4 +30,4 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 找时间了解 lodash的chunk函数 能让数组添加多一维
 
-#### 结课 完坑
+#### 结课 完坑 linet

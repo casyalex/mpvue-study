@@ -2,7 +2,7 @@
   <div>
     <BookInfo :info="info"></BookInfo>
     <CommentList :comments="comments"></CommentList>
-    <div class="comment">
+    <div class="comment" v-if="showAdd">
       <textarea v-model="comment"
                 class="textarea"
                 :maxlength="100"
@@ -21,6 +21,10 @@
         评论
       </button>
     </div>
+    <div v-else class="text-footer">
+      未登录或者你已经评论过了
+    </div>
+    <button class="btn" open-type="share">转发给好友</button>
   </div>
 </template>
 
@@ -35,13 +39,27 @@ export default {
   },
   data () {
     return {
-      comments: '',
+      comments: [],
       userinfo: '',
       bookid: '',
       info: {},
       comment: '',
       location: '',
       phone: ''
+    }
+  },
+  computed: {
+    showAdd () {
+      // 没登录
+      if (!this.userinfo.openId) {
+        return false
+      }
+      // 评论列表里有自己的openId
+      if (this.comments.filter(v => v.openid === this.userinfo.openId).length) {
+        return false
+      } else {
+        return true
+      }
     }
   },
   methods: {
@@ -114,6 +132,8 @@ export default {
       try {
         await post('/weapp/addcomment', data)
         this.comment = ''
+        // 提交完评论 刷一下评论列表，加载新评论
+        this.getComments()
       } catch (error) {
         showModal('扑街', error.msg)
         console.log(error)
@@ -127,6 +147,15 @@ export default {
     const userinfo = wx.getStorageSync('userinfo')
     if (userinfo) {
       this.userinfo = userinfo
+    }
+  },
+  onShareAppMessage (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      // console.log(res.target)
+    }
+    return {
+      title: `分享给你 ${this.info.title}`
     }
   }
 }

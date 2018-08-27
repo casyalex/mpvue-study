@@ -31,3 +31,17 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 找时间了解 lodash的chunk函数 能让数组添加多一维
 
 #### 结课 完坑 linet
+
+#### 上传腾讯云开发环境
+
+1.src/config.js host项改成 开发环境 request 域名
+
+2.server端的 config.js，注释掉头部的本地开发，把数据库密码改成APPID
+
+3.到腾讯云后台 登录mysql 账号root 密码appid，建表
+
+4.建表可以用navicat的建表语句，对表格右键》对象信息》DDL 复制粘贴到 腾讯云的phpMyadmin SQL命令行中 点执行 完成
+
+5.联调没问题，就已经部署完毕
+
+
